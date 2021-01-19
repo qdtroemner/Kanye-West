@@ -7,13 +7,13 @@ The only missing file is `kanye_secrets.py` which you should add to `src/deps/` 
 
 ## kanye_secrets.py
 These are the secrets that should be included in the `kanye_secrets.py` script, if you would like full functionality.
-- TOKEN
+- `TOKEN`
 	- The token of your Discord bot.
-- SPOTIFYB64
+- `SPOTIFYB64`
 	- A base-64 encoded [Spotify API](https://developer.spotify.com/dashboard/applications) bearer token.
-- GENIUS
+- `GENIUS`
 	- A [Genius lyrics API](https://genius.com/api-clients) key.
-- GIPHY
+- `GIPHY`
 	- A [Giphy API](https://developers.giphy.com/dashboard/) key.
 
 The docs for [discord.py](https://github.com/Rapptz/discord.py) can be found [here](https://discordpy.readthedocs.io/en/latest/api.html).
