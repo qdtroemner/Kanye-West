@@ -65,14 +65,13 @@ class Text(commands.Cog):
 		data = _lyrics.get_lyrics(arg)
 		if not data or data is None:
 			await ctx.send("Trouble getting info.")
-		(lyrics, title, artist, genius_url, album_cover) = data
 		pfp_url = ctx.author.avatar_url
 
-		embed = discord.Embed(title=title, description=artist, url=genius_url, colour=discord.Colour.from_hsv(random(), 1, 1))
-		for verse in lyrics:
+		embed = discord.Embed(title=data["title"], description=data["artist"], url=data["genius_url"], colour=discord.Colour.from_hsv(random(), 1, 1))
+		for verse in data["lyrics"]:
 			embed.add_field(name=self.ZERO_WIDTH_SPACE, value=verse, inline=False)
-		if album_cover is not None:
-			embed.set_image(url=album_cover)
+		if data["album_cover"] is not None:
+			embed.set_image(url=data["album_cover"])
 		embed.set_thumbnail(url=pfp_url)
 		try:
 			await ctx.send(embed=embed)
@@ -86,11 +85,10 @@ class Text(commands.Cog):
 		data = _lyrics.get_lyrics(arg, get_full_info=False)
 		if not data or data is None:
 			await ctx.send("Trouble getting info.")
-		(lyrics, title, artist) = data
 		pfp_url = ctx.author.avatar_url
 
-		embed = discord.Embed(title=title, description=artist, colour=discord.Colour.from_hsv(random(), 1, 1))
-		for verse in lyrics:
+		embed = discord.Embed(title=data["title"], description=data["artist"], colour=discord.Colour.from_hsv(random(), 1, 1))
+		for verse in data["lyrics"]:
 			embed.add_field(name=self.ZERO_WIDTH_SPACE, value=verse, inline=False)
 		embed.set_thumbnail(url=pfp_url)
 		try:

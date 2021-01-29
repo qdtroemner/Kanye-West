@@ -21,6 +21,6 @@ def get_lyrics(title, artist="", get_full_info=True):
 
 	lyrics = lyrics.split("\n\n")
 	if get_full_info:	
-		return lyrics, title, artist, genius_url, album_cover
+		return {"lyrics": lyrics, "title": title, "artist": artist, "genius_url": genius_url, "album_cover": album_cover}
 	else:
-		return lyrics, title, artist
+		return {"lyrics": lyrics, "title": title, "artist": artist}
