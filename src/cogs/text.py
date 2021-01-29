@@ -26,53 +26,53 @@ class Text(commands.Cog):
 
 	@commands.command(aliases=["yetrack", "ys", "yt"])
 	async def yesong(self, ctx):
-		await ctx.send("Searching...")
-		search_url = "https://api.spotify.com/v1/search"
-		#"Bearer " + 
-		headers = {}#"Authorization": secrets.SPOTIFY}
-		parameters = {
-			"q": "Kanye West",
-			"type": "track",
-			"limit": 50
-		}
-		data = self.spotify_client.get(search_url, headers=headers, params=parameters)
-		tracks = data['tracks']['items']
-		track = choice(tracks)
+		async with ctx.typing():
+			search_url = "https://api.spotify.com/v1/search"
+			#"Bearer " + 
+			headers = {}#"Authorization": secrets.SPOTIFY}
+			parameters = {
+				"q": "Kanye West",
+				"type": "track",
+				"limit": 50
+			}
+			data = self.spotify_client.get(search_url, headers=headers, params=parameters)
+			tracks = data['tracks']['items']
+			track = choice(tracks)
 
-		name = track['name']
-		artists = track['artists']
-		artist_name = ""
-		for artist in artists:
-			if artist != artists[-1]:
-				artist_name += artist['name'] + "; "
-			else:
-				artist_name += artist['name']
-		album = track['album']['name']
-		album_url = track['album']['external_urls']['spotify']
-		album_cover = track['album']['images'][0]['url']
-		track_url = track['external_urls']['spotify']
-		thumbnail = ctx.author.avatar_url
+			name = track['name']
+			artists = track['artists']
+			artist_name = ""
+			for artist in artists:
+				if artist != artists[-1]:
+					artist_name += artist['name'] + "; "
+				else:
+					artist_name += artist['name']
+			album = track['album']['name']
+			album_url = track['album']['external_urls']['spotify']
+			album_cover = track['album']['images'][0]['url']
+			track_url = track['external_urls']['spotify']
+			thumbnail = ctx.author.avatar_url
 
-		embed = discord.Embed(title=name, description=artist_name, url=track_url, colour=discord.Colour.from_hsv(random(), 1, 1))
-		embed.set_image(url=album_cover)
-		embed.set_author(name=album, url=album_url)
-		#embed.set_thumbnail(url=thumbnail)
+			embed = discord.Embed(title=name, description=artist_name, url=track_url, colour=discord.Colour.from_hsv(random(), 1, 1))
+			embed.set_image(url=album_cover)
+			embed.set_author(name=album, url=album_url)
+			#embed.set_thumbnail(url=thumbnail)
 		await ctx.send(embed=embed)
 
 	@commands.command(aliases=['l'])
 	async def lyrics(self, ctx, *, arg):
-		await ctx.send("Searching...")
-		data = _lyrics.get_lyrics(arg)
-		if not data or data is None:
-			await ctx.send("Trouble getting info.")
-		pfp_url = ctx.author.avatar_url
+		async with ctx.typing():
+			data = _lyrics.get_lyrics(arg)
+			if not data or data is None:
+				await ctx.send("Trouble getting info.")
+			pfp_url = ctx.author.avatar_url
 
-		embed = discord.Embed(title=data["title"], description=data["artist"], url=data["genius_url"], colour=discord.Colour.from_hsv(random(), 1, 1))
-		for verse in data["lyrics"]:
-			embed.add_field(name=self.ZERO_WIDTH_SPACE, value=verse, inline=False)
-		if data["album_cover"] is not None:
-			embed.set_image(url=data["album_cover"])
-		embed.set_thumbnail(url=pfp_url)
+			embed = discord.Embed(title=data["title"], description=data["artist"], url=data["genius_url"], colour=discord.Colour.from_hsv(random(), 1, 1))
+			for verse in data["lyrics"]:
+				embed.add_field(name=self.ZERO_WIDTH_SPACE, value=verse, inline=False)
+			if data["album_cover"] is not None:
+				embed.set_image(url=data["album_cover"])
+			embed.set_thumbnail(url=pfp_url)
 		try:
 			await ctx.send(embed=embed)
 		except discord.errors.HTTPException as http_error:
@@ -81,16 +81,16 @@ class Text(commands.Cog):
 
 	@commands.command(aliases=['qlyrics', 'ql'])
 	async def quicklyrics(self, ctx, *, arg):
-		await ctx.send("Searching...")
-		data = _lyrics.get_lyrics(arg, get_full_info=False)
-		if not data or data is None:
-			await ctx.send("Trouble getting info.")
-		pfp_url = ctx.author.avatar_url
+		async with ctx.typing():
+			data = _lyrics.get_lyrics(arg, get_full_info=False)
+			if not data or data is None:
+				await ctx.send("Trouble getting info.")
+			pfp_url = ctx.author.avatar_url
 
-		embed = discord.Embed(title=data["title"], description=data["artist"], colour=discord.Colour.from_hsv(random(), 1, 1))
-		for verse in data["lyrics"]:
-			embed.add_field(name=self.ZERO_WIDTH_SPACE, value=verse, inline=False)
-		embed.set_thumbnail(url=pfp_url)
+			embed = discord.Embed(title=data["title"], description=data["artist"], colour=discord.Colour.from_hsv(random(), 1, 1))
+			for verse in data["lyrics"]:
+				embed.add_field(name=self.ZERO_WIDTH_SPACE, value=verse, inline=False)
+			embed.set_thumbnail(url=pfp_url)
 		try:
 			await ctx.send(embed=embed)
 		except discord.errors.HTTPException as http_error:
