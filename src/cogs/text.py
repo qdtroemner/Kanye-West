@@ -24,41 +24,6 @@ class Text(commands.Cog):
 		if req.status_code == 200:
 			await ctx.send(req.text)
 
-	@commands.command(aliases=["yetrack", "ys", "yt"])
-	async def yesong(self, ctx):
-		async with ctx.typing():
-			search_url = "https://api.spotify.com/v1/search"
-			#"Bearer " + 
-			headers = {}#"Authorization": secrets.SPOTIFY}
-			parameters = {
-				"q": "Kanye West",
-				"type": "track",
-				"limit": 50
-			}
-			data = self.spotify_client.get(search_url, headers=headers, params=parameters)
-			tracks = data['tracks']['items']
-			track = choice(tracks)
-
-			name = track['name']
-			artists = track['artists']
-			artist_name = ""
-			for artist in artists:
-				if artist != artists[-1]:
-					artist_name += artist['name'] + "; "
-				else:
-					artist_name += artist['name']
-			album = track['album']['name']
-			album_url = track['album']['external_urls']['spotify']
-			album_cover = track['album']['images'][0]['url']
-			track_url = track['external_urls']['spotify']
-			thumbnail = ctx.author.avatar_url
-
-			embed = discord.Embed(title=name, description=artist_name, url=track_url, colour=discord.Colour.from_hsv(random(), 1, 1))
-			embed.set_image(url=album_cover)
-			embed.set_author(name=album, url=album_url)
-			#embed.set_thumbnail(url=thumbnail)
-		await ctx.send(embed=embed)
-
 	@commands.command(aliases=['l'])
 	async def lyrics(self, ctx, *, arg):
 		async with ctx.typing():

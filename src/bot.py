@@ -5,7 +5,8 @@ from deps import kanye_secrets as secrets
 
 INITIAL_EXTENTIONS = [
 	'cogs.text',
-	'cogs.fun'
+	'cogs.fun',
+	'cogs.music'
 ]
 
 class Client(commands.Bot):
