@@ -4,7 +4,8 @@ from discord.ext import commands
 from deps import kanye_secrets as secrets
 
 INITIAL_EXTENTIONS = [
-	'cogs.text'
+	'cogs.text',
+	'cogs.fun'
 ]
 
 class Client(commands.Bot):
