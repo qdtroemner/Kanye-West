@@ -41,5 +41,11 @@ class Fun(commands.Cog):
 			image_data = this_x_does_not_exist.generate_rental()
 			await ctx.send(file=discord.File(fp=image_data, filename="rental.jpg"))
 
+	@commands.command(aliases=['gato', 'kitten'])
+	async def cat(self, ctx):
+		async with ctx.typing():
+			image_data = this_x_does_not_exist.generate_cat()
+			await ctx.send(file=discord.File(fp=image_data, filename="cat.jpg"))
+
 def setup(bot):
 	bot.add_cog(Fun(bot))

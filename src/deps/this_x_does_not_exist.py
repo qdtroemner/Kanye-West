@@ -12,3 +12,9 @@ def generate_rental():
 	req = requests.get(url)
 	image_data = BytesIO(req.content)
 	return image_data
+
+def generate_cat():
+	url = "https://thiscatdoesnotexist.com/"
+	req = requests.get(url)
+	image_data = BytesIO(req.content)
+	return image_data
