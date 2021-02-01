@@ -10,12 +10,11 @@ from deps import spotify
 from deps import this_x_does_not_exist
 from random import choice, random
 
-class This_X_Does_Not_Exist(commands.Cog):
+class This_X_Does_Not_Exist(commands.Cog, name="This X Does Not Exist"):
 	def __init__(self, bot):
 		self.bot = bot
 		self.spotify_client = spotify.Spotify()
 		self.ZERO_WIDTH_SPACE = "​"
-		type(self).__name__ = "This X Does Not Exist" # Hack for renaming Cog
 
 	#@commands.cog.listener()
 
