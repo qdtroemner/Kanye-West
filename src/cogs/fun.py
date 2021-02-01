@@ -47,5 +47,11 @@ class Fun(commands.Cog):
 			image_data = this_x_does_not_exist.generate_cat()
 			await ctx.send(file=discord.File(fp=image_data, filename="cat.jpg"))
 
+	@commands.command(aliases=['arte', 'painting'])
+	async def art(self, ctx):
+		async with ctx.typing():
+			image_data = this_x_does_not_exist.generate_art()
+			await ctx.send(file=discord.File(fp=image_data, filename="art.jpg"))
+
 def setup(bot):
 	bot.add_cog(Fun(bot))

@@ -18,3 +18,9 @@ def generate_cat():
 	req = requests.get(url)
 	image_data = BytesIO(req.content)
 	return image_data
+
+def generate_art():
+	url = "https://thisartworkdoesnotexist.com/"
+	req = requests.get(url)
+	image_data = BytesIO(req.content)
+	return image_data
