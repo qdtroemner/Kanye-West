@@ -20,3 +20,9 @@ def generate_art():
 
 def generate_horse():
 	return generate_from_url("https://thishorsedoesnotexist.com/")
+
+def generate_city():
+	return generate_from_url("http://thiscitydoesnotexist.com/")
+
+def generate_car():
+	return generate_from_url("https://www.thisautomobiledoesnotexist.com/")

@@ -48,5 +48,17 @@ class This_X_Does_Not_Exist(commands.Cog, name="This X Does Not Exist"):
 			image_data = this_x_does_not_exist.generate_horse()
 			await ctx.send(file=discord.File(fp=image_data, filename="art.jpg"))
 
+	@commands.command(aliases=['town'])
+	async def city(self, ctx):
+		async with ctx.typing():
+			image_data = this_x_does_not_exist.generate_city()
+			await ctx.send(file=discord.File(fp=image_data, filename="city.jpg"))
+		
+	@commands.command(aliases=['automobile'])
+	async def car(self, ctx):
+		async with ctx.typing():
+			image_data = this_x_does_not_exist.generate_car()
+			await ctx.send(file=discord.File(fp=image_data, filename="car.jpg"))
+
 def setup(bot):
 	bot.add_cog(This_X_Does_Not_Exist(bot))

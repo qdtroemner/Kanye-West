@@ -7,6 +7,7 @@ import io
 
 from deps import kanye_secrets as secrets
 from deps import earthview
+from deps import images
 from deps import spotify
 from random import choice, random
 
@@ -27,6 +28,10 @@ class Fun(commands.Cog):
 	@commands.command(aliases=['googleearth', 'map', 'world'])
 	async def earth(self, ctx):
 		await ctx.send(earthview.get_random_earthview())
+
+	@commands.command(aliases=['picture', 'photo', 'pic', 'img'])
+	async def image(self, ctx):
+		await ctx.send(images.random_image())
 
 def setup(bot):
 	bot.add_cog(Fun(bot))
