@@ -2,8 +2,6 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.core import command
 
-import requests
-from deps import kanye_secrets as secrets
 from deps import spotify
 from random import choice, random, randint
 

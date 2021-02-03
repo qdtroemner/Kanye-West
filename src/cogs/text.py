@@ -3,11 +3,10 @@ from discord.ext import commands
 from discord.ext.commands.core import command
 
 import requests
-from deps import kanye_secrets as secrets
 from deps import spotify
 from deps import lyrics as _lyrics
 from deps import gif
-from deps import tweets
+#from deps import tweets
 from random import choice, random
 
 class Text(commands.Cog):
@@ -22,10 +21,14 @@ class Text(commands.Cog):
 		url = "https://api.kanye.rest/?format=text"
 		req = requests.get(url)
 		if req.status_code == 200:
-			await ctx.send(req.text)
+			await ctx.send(f"> {req.text}")
 
 	@commands.command(aliases=['l'])
-	async def lyrics(self, ctx, *, arg):
+	async def lyrics(self, ctx, *, arg=None):
+		if arg is None:
+			await ctx.send("I need a song.")
+			return
+
 		async with ctx.typing():
 			data = _lyrics.get_lyrics(arg)
 			if not data or data is None:
@@ -45,7 +48,11 @@ class Text(commands.Cog):
 			await ctx.send("Something went wrong. The lyrics are most likely too long.")
 
 	@commands.command(aliases=['qlyrics', 'ql'])
-	async def quicklyrics(self, ctx, *, arg):
+	async def quicklyrics(self, ctx, *, arg=None):
+		if arg is None:
+			await ctx.send("I need a song.")
+			return
+
 		async with ctx.typing():
 			data = _lyrics.get_lyrics(arg, get_full_info=False)
 			if not data or data is None:
@@ -63,7 +70,11 @@ class Text(commands.Cog):
 			await ctx.send("Something went wrong. The lyrics are most likely too long.")
 
 	@commands.command(aliases=['giphy'])
-	async def gif(self, ctx, *, arg):
+	async def gif(self, ctx, *, arg=None):
+		if arg is None:
+			await ctx.send("I need a search query.")
+			return
+
 		data = gif.search_gifs(arg)
 		if not data or data is None:
 			await ctx.send("Trouble getting gifs.")

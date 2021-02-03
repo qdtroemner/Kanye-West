@@ -2,9 +2,9 @@ import requests
 from deps import kanye_secrets as secrets
 from random import randint
 
-def search_gifs(query):
-	if not query:
-		return False
+def search_gifs(query=None):
+	if query is None:
+		return None
 	
 	url = "https://api.giphy.com/v1/gifs/search"
 	params = {
@@ -15,11 +15,6 @@ def search_gifs(query):
 		"lang": "en"
 	}
 	req = requests.get(url, params=params)
-	
-	
-	#print(req.json())
-	#return False
-	
 	
 	if req.status_code == 200:
 		json = req.json()

@@ -2,14 +2,9 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.core import command
 
-import requests
-import io
-
-from deps import kanye_secrets as secrets
 from deps import earthview
 from deps import images
 from deps import spotify
-from random import choice, random
 
 class Fun(commands.Cog):
 	def __init__(self, bot):
