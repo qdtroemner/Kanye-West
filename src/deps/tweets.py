@@ -1,18 +1,6 @@
 import requests
 from deps import kanye_secrets as secrets
 
-"""
-def get_kanye_tweet():
-	url = "https://api.twitter.com/2/users//tweets"
-	headers = {
-
-	}
-	params = {
-
-	}
-	pass
-"""
-
 def get_recent_tweet():
 	url = "https://api.twitter.com/2/tweets/sample/stream"
 	headers = {
